@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+#  autoconfigure:
+#    exclude:
+##      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+#  redis:
+#    host: localhost
+#    port: 6379
+#    timeout: 6000
+#    lettuce:
+#      pool:
+#        max-active: 8
+#        max-idle: 8
+#        min-idle: 0
+#        time-between-eviction-runs: 10s
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      ##로컬에서 디비연결
+      jdbc-url: jdbc:mysql://localhost:3306/jpa?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+      username: my_user
+      password: 1111
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false  # spring.jpa.open-in-view 설정 명시
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect  # MySQL8Dialect 대신 MySQLDialect 사용
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+
+jwt:
+  secret: abcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefgabcdefg
+  refresh-token-validity-in-seconds: 1209600 # 14일
+  access-token-validity-in-seconds: 43200 # 12시간
+logging:
+  level:
+    org.springframework.security: DEBUG
