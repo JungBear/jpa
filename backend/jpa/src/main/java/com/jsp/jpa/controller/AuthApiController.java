@@ -5,6 +5,7 @@ import com.jsp.jpa.service.AuthServiceImpl;
 import com.jsp.jpa.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class AuthApiController {
 
     private final AuthServiceImpl authService;
@@ -53,7 +55,7 @@ public class AuthApiController {
                 .httpOnly(true)
                 .secure(true)
                 .build();
-
+        log.info("AccessToken : " + tokenDto.getAccessToken());
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, httpCookie.toString())
                 // AT 저장
